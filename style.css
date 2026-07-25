@@ -1,372 +1,192 @@
-/* =========================================
-   BestAIToolsDirectory - Core Styles
-   ========================================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+/* ===========================
+   PORTFOLIO GRID - NEXORA
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    background-color: #070B14; /* Screenshot jaisa deep dark blue/black background */
-    color: #FFFFFF;
-    line-height: 1.5;
+body{
+    font-family:'Poppins',sans-serif;
+    background:#050B18;
+    color:#fff;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+/* Section */
+
+.portfolio{
+    width:100%;
+    padding:80px 8%;
 }
 
-/* =========================================
-   Navbar (Top Header)
-   ========================================= */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 5%;
-    border-bottom: 1px solid #1F2937;
-    background-color: rgba(7, 11, 20, 0.95);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+.portfolio-title{
+    text-align:center;
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:20px;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    letter-spacing: 0.5px;
+.portfolio-title span{
+    color:#2F6BFF;
 }
 
-.logo-icon {
-    color: #3B82F6;
-    font-size: 1.8rem;
+.portfolio-subtitle{
+    text-align:center;
+    color:#9CA3AF;
+    max-width:700px;
+    margin:auto;
+    margin-bottom:50px;
+    line-height:1.8;
 }
 
-.nav-links {
-    display: flex;
-    gap: 35px;
-    font-size: 0.95rem;
-    color: #9CA3AF;
-    font-weight: 500;
+/* Categories */
+
+.filter-buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-bottom:50px;
 }
 
-.nav-links a:hover {
-    color: #FFFFFF;
-    transition: color 0.3s ease;
+.filter-buttons button{
+    background:#0F172A;
+    color:white;
+    border:1px solid #1E293B;
+    padding:12px 25px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:.4s;
 }
 
-.btn-submit {
-    background-color: #2563EB;
-    color: white;
-    padding: 10px 24px;
-    border-radius: 8px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.filter-buttons button:hover,
+.filter-buttons .active{
+    background:#2563EB;
+    border-color:#2563EB;
 }
 
-.btn-submit:hover {
-    background-color: #1D4ED8;
+/* Grid */
+
+.portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
 }
 
-/* =========================================
-   Hero Section & Search
-   ========================================= */
-.hero {
-    text-align: center;
-    padding: 80px 20px 50px;
-    background: radial-gradient(circle at top center, #1E293B 0%, #070B14 70%);
+/* Card */
+
+.card{
+    background:#0B1220;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    overflow:hidden;
+    transition:.4s;
+    position:relative;
 }
 
-.hero-badge {
-    color: #60A5FA;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    display: block;
+.card:hover{
+    transform:translateY(-12px);
+    border-color:#2563EB;
+    box-shadow:0 20px 45px rgba(37,99,235,.35);
 }
 
-.hero h1 {
-    font-size: 3.8rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    letter-spacing: -1px;
+/* Logo */
+
+.card img{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    display:block;
+    margin:35px auto 15px;
 }
 
-.hero h1 span {
-    color: #3B82F6;
+/* Text */
+
+.card h3{
+    text-align:center;
+    font-size:24px;
+    margin-bottom:10px;
 }
 
-.hero p {
-    color: #9CA3AF;
-    font-size: 1.15rem;
-    max-width: 600px;
-    margin: 0 auto 40px;
+.badge{
+    display:inline-block;
+    background:#1E3A8A;
+    color:#60A5FA;
+    padding:6px 15px;
+    border-radius:20px;
+    font-size:13px;
+    margin:0 auto 20px;
 }
 
-/* Search Bar Setup */
-.search-container {
-    display: flex;
-    max-width: 650px;
-    margin: 0 auto 40px;
-    background: #111827;
-    border: 1px solid #374151;
-    border-radius: 12px;
-    padding: 6px;
-    transition: border-color 0.3s;
+.card-content{
+    text-align:center;
+    padding:0 25px 30px;
 }
 
-.search-container:focus-within {
-    border-color: #3B82F6;
+.card p{
+    color:#A1A1AA;
+    font-size:15px;
+    line-height:1.7;
+    margin-bottom:25px;
 }
 
-.search-container input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    padding: 16px 24px;
-    color: #FFF;
-    font-size: 1.05rem;
-    outline: none;
+/* Button */
+
+.card a{
+    display:inline-block;
+    background:#2563EB;
+    color:white;
+    text-decoration:none;
+    padding:12px 30px;
+    border-radius:12px;
+    font-weight:600;
+    transition:.3s;
 }
 
-.search-container button {
-    background: #2563EB;
-    color: #FFF;
-    border: none;
-    padding: 0 35px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s;
+.card a:hover{
+    background:#1D4ED8;
 }
 
-.search-container button:hover {
-    background: #1D4ED8;
+/* Hover Glow */
+
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,#2563EB22,transparent,#00D4FF22);
+    opacity:0;
+    transition:.5s;
 }
 
-/* =========================================
-   Category Filters
-   ========================================= */
-.categories {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 50px;
+.card:hover::before{
+    opacity:1;
 }
 
-.cat-btn {
-    background: #111827;
-    border: 1px solid #374151;
-    color: #D1D5DB;
-    padding: 10px 24px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
+/* Responsive */
+
+@media(max-width:768px){
+
+.portfolio{
+padding:60px 20px;
 }
 
-.cat-btn.active,.cat-btn:hover {
-    background: #2563EB;
-    color: #FFF;
-    border-color: #2563EB;
+.portfolio-title{
+font-size:32px;
 }
 
-/* =========================================
-   Tools Grid & Cards
-   ========================================= */
-.grid-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px 50px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 24px;
+.filter-buttons{
+gap:10px;
 }
 
-.card {
-    background: #111827;
-    border: 1px solid #1F2937;
-    border-radius: 16px;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+.filter-buttons button{
+padding:10px 18px;
+font-size:14px;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    border-color: #374151;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+.card h3{
+font-size:20px;
 }
 
-.card-icon-wrapper {
-    width: 65px;
-    height: 65px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
 }
-
-/* Custom Icon Background Colors matched from image */
-.bg-green { background: #064E3B; color: #10B981; }
-.bg-blue { background: #1E3A8A; color: #3B82F6; }
-.bg-cyan { background: #164E63; color: #06B6D4; }
-.bg-white { background: #E5E7EB; color: #111827; }
-.bg-purple { background: #4C1D95; color: #A78BFA; }
-
-.card h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.best-for {
-    color: #FBBF24; /* Image wala yellow/orange accent color */
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 12px;
-}
-
-.card p {
-    color: #9CA3AF;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    flex-grow: 1;
-    margin-bottom: 24px;
-}
-
-.explore-btn {
-    width: 100%;
-    display: block;
-    background: transparent;
-    border: 1px solid #3B82F6;
-    color: #3B82F6;
-    padding: 12px;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.explore-btn:hover {
-    background: rgba(59, 130, 246, 0.1);
-}
-
-/* =========================================
-   Pagination
-   ========================================= */
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 60px;
-}
-
-.page-btn {
-    background: #111827;
-    border: 1px solid #374151;
-    color: #D1D5DB;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.page-btn.active,.page-btn:hover {
-    background: #2563EB;
-    color: white;
-    border-color: #2563EB;
-}
-
-.page-dots {
-    color: #6B7280;
-    font-weight: bold;
-}
-
-/* =========================================
-   Bottom Features Section
-   ========================================= */
-.features-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    border-top: 1px solid #1F2937;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 30px;
-    color: #9CA3AF;
-}
-
-.feature h4 {
-    color: #FFFFFF;
-    font-size: 1.05rem;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.feature p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-
-.feature-ideal ul {
-    list-style: none;
-    font-size: 0.95rem;
-    line-height: 1.8;
-}
-
-.feature-ideal li::before {
-    content: "•";
-    color: #3B82F6;
-    font-weight: bold;
-    display: inline-block; 
-    width: 1em;
-    margin-right: 8px;
-}
-
-/* Responsive Design for Mobile */
-@media (max-width: 768px) {
-   .nav-links {
-        display: none; /* Mobile par nav links hide */
-    }
-   .hero h1 {
-        font-size: 2.8rem;
-    }
-   .search-container {
-        flex-direction: column;
-        background: transparent;
-        border: none;
-    }
-   .search-container input {
-        background: #111827;
-        border: 1px solid #374151;
-        border-radius: 8px;
-        margin-bottom: 10px;
-    }
-   .search-container button {
-        padding: 16px;
-        width: 100%;
-    }
-}
-

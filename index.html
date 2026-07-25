@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Index — A Living Catalog of AI Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F1EEE3;
+    --paper-2:#FBFAF4;
+    --ink:#201E17;
+    --ink-soft:#615C4B;
+    --ink-faint:#9A937C;
+    --accent:#2F5D4E;
+    --accent-2:#B9812E;
+    --line:#DAD4C1;
+    --line-strong:#C7BFA6;
+    --radius:2px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--accent);color:var(--paper-2);}
+
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .rule{border:none;border-top:1px solid var(--line);}
+
+  /* ===== NAV ===== */
+  nav{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:22px 6%;
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;
+    background:rgba(241,238,227,0.92);
+    backdrop-filter:blur(6px);
+    z-index:50;
+  }
+  .wordmark{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.3rem;
+    letter-spacing:-0.01em;
+    display:flex;align-items:baseline;gap:8px;
+  }
+  .wordmark .slash{color:var(--accent);font-weight:400;}
+  .wordmark .catno{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.65rem;
+    color:var(--ink-faint);
+    letter-spacing:0.08em;
+    align-self:center;
+  }
+  .nav-links{display:flex;gap:34px;font-size:0.85rem;color:var(--ink-soft);}
+  .nav-links a{position:relative;padding-bottom:4px;}
+  .nav-links a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+    background:var(--accent);transition:width 0.25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .btn-submit{
+    background:var(--ink);
+    color:var(--paper-2);
+    padding:10px 20px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    letter-spacing:0.03em;
+    border:1px solid var(--ink);
+    cursor:pointer;
+    transition:0.25s ease;
+  }
+  .btn-submit:hover{background:transparent;color:var(--ink);}
+
+  /* ===== HERO ===== */
+  .hero{
+    padding:90px 6% 50px;
+    max-width:1240px;margin:0 auto;
+  }
+  .hero-top{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:40px;flex-wrap:wrap;
+    border-bottom:1px solid var(--line);
+    padding-bottom:40px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.75rem;
+    color:var(--accent);
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:clamp(2.4rem,5.2vw,4.4rem);
+    line-height:1.02;
+    letter-spacing:-0.02em;
+    max-width:11ch;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--accent);
+  }
+  .hero-meta{
+    max-width:280px;
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    line-height:1.6;
+  }
+  .hero-meta .count{
+    font-family:'Fraunces',serif;
+    font-size:2.6rem;
+    color:var(--ink);
+    display:block;
+    line-height:1;
+    margin-bottom:6px;
+  }
+
+  /* ===== SEARCH / FILTER ===== */
+  .control-bar{
+    display:flex;gap:0;align-items:stretch;
+    margin-top:36px;
+    border:1px solid var(--ink);
+    background:var(--paper-2);
+  }
+  .control-bar input{
+    flex:1;
+    border:none;background:transparent;
+    padding:18px 22px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.95rem;
+    color:var(--ink);
+    outline:none;
+  }
+  .control-bar input::placeholder{color:var(--ink-faint);}
+  .control-bar .go{
+    padding:0 26px;
+    background:var(--ink);
+    color:var(--paper-2);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.8rem;
+    letter-spacing:0.05em;
+    display:flex;align-items:center;
+  }
+
+  .tabs{
+    display:flex;flex-wrap:wrap;gap:8px;
+    margin-top:22px;
+  }
+  .tab{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.76rem;
+    letter-spacing:0.03em;
+    padding:8px 16px;
+    border:1px solid var(--line-strong);
+    background:transparent;
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:0.2s ease;
+  }
+  .tab:hover{border-color:var(--ink);color:var(--ink);}
+  .tab.active{background:var(--accent);border-color:var(--accent);color:var(--paper-2);}
+
+  /* ===== FEATURED STRIP ===== */
+  .section-label{
+    display:flex;align-items:baseline;gap:14px;
+    max-width:1240px;margin:70px auto 26px;padding:0 6%;
+  }
+  .section-label .no{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.75rem;color:var(--accent);
+  }
+  .section-label h2{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:1.5rem;
+    letter-spacing:-0.01em;
+  }
+  .section-label .fill{flex:1;border-top:1px solid var(--line);margin-left:6px;}
+
+  .featured-grid{
+    max-width:1240px;margin:0 auto;padding:0 6%;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .feat-card{
+    background:var(--paper-2);
+    padding:32px 28px;
+    display:flex;flex-direction:column;
+    min-height:230px;
+    position:relative;
+    transition:background 0.25s ease;
+  }
+  .feat-card:hover{background:var(--paper);}
+  .feat-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.7rem;
+    color:var(--ink-faint);
+    letter-spacing:0.06em;
+    margin-bottom:22px;
+  }
+  .feat-card h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.55rem;
+    margin-bottom:10px;
+  }
+  .feat-card p{
+    color:var(--ink-soft);
+    font-size:0.9rem;
+    line-height:1.55;
+    flex-grow:1;
+  }
+  .feat-arrow{
+    align-self:flex-end;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:1.1rem;
+    color:var(--accent);
+    transition:transform 0.25s ease;
+  }
+  .feat-card:hover .feat-arrow{transform:translate(4px,-4px);}
+
+  /* ===== INDEX LIST ===== */
+  .index-list{
+    max-width:1240px;margin:0 auto 40px;padding:0 6%;
+  }
+  .index-row{
+    display:grid;
+    grid-template-columns:64px 1.3fr 1fr 2.4fr 90px;
+    align-items:center;
+    gap:20px;
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+    cursor:default;
+    transition:background 0.2s ease;
+  }
+  .index-row:hover{background:var(--paper-2);}
+  .index-row.hidden{display:none;}
+  .row-no{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    color:var(--ink-faint);
+  }
+  .row-name{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.15rem;
+  }
+  .row-cat{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--accent-2);
+    align-self:center;
+  }
+  .row-desc{
+    color:var(--ink-soft);
+    font-size:0.9rem;
+    line-height:1.5;
+  }
+  .row-link{
+    justify-self:end;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.76rem;
+    color:var(--ink);
+    border:1px solid var(--line-strong);
+    padding:8px 14px;
+    text-align:center;
+    transition:0.2s ease;
+    white-space:nowrap;
+  }
+  .row-link:hover{background:var(--ink);color:var(--paper-2);border-color:var(--ink);}
+
+  .empty-state{
+    display:none;
+    padding:60px 0;
+    text-align:center;
+    color:var(--ink-faint);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.85rem;
+  }
+  .empty-state.show{display:block;}
+
+  /* ===== FOOTER ===== */
+  footer{
+    border-top:1px solid var(--line);
+    margin-top:60px;
+    padding:50px 6% 40px;
+  }
+  .footer-inner{
+    max-width:1240px;margin:0 auto;
+    display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px;
+  }
+  footer h5{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:14px;
+  }
+  footer .lead{
+    font-family:'Fraunces',serif;
+    font-size:1.3rem;
+    max-width:26ch;
+    line-height:1.3;
+  }
+  footer ul{list-style:none;}
+  footer li{margin-bottom:9px;font-size:0.88rem;color:var(--ink-soft);}
+  footer li a:hover{color:var(--ink);}
+  .foot-bottom{
+    max-width:1240px;margin:40px auto 0;
+    padding-top:20px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;color:var(--ink-faint);
+  }
+
+  @media (max-width:860px){
+    .nav-links{display:none;}
+    .featured-grid{grid-template-columns:1fr;}
+    .index-row{
+      grid-template-columns:1fr;
+      gap:6px;
+      padding:20px 0;
+    }
+    .row-link{justify-self:start;margin-top:8px;}
+    .footer-inner{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wordmark">THE<span class="slash">/</span>INDEX <span class="catno">AI TOOL CATALOG</span></div>
+  <div class="nav-links">
+    <a href="#">Catalog</a>
+    <a href="#">Categories</a>
+    <a href="#">Dispatch</a>
+    <a href="#">About</a>
+  </div>
+  <button class="btn-submit">+ SUBMIT A TOOL</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-top">
+    <div>
+      <span class="eyebrow">Vol. 04 — Updated July 2026</span>
+      <h1>A field guide to the tools <em>doing the work.</em></h1>
+    </div>
+    <div class="hero-meta">
+      <span class="count">100</span>
+      entries catalogued this edition, sorted, tagged, and cross-referenced by category.
+    </div>
+  </div>
+
+  <div class="control-bar">
+    <input id="searchInput" type="text" placeholder="Search the catalog — try “video” or “Notion”">
+    <div class="go">SEARCH →</div>
+  </div>
+
+  <div class="tabs" id="tabBar">
+    <button class="tab active" data-cat="all">All entries</button>
+    <button class="tab" data-cat="chatbots">Chatbots</button>
+    <button class="tab" data-cat="design">Design</button>
+    <button class="tab" data-cat="video">Video</button>
+    <button class="tab" data-cat="writing">Writing</button>
+    <button class="tab" data-cat="productivity">Productivity</button>
+    <button class="tab" data-cat="marketing">Marketing</button>
+    <button class="tab" data-cat="audio">Audio</button>
+    <button class="tab" data-cat="code">Code</button>
+    <button class="tab" data-cat="automation">Automation</button>
+    <button class="tab" data-cat="3d">3D &amp; AR</button>
+  </div>
+</section>
+
+<div class="section-label">
+  <span class="no">§01</span>
+  <h2>Editor's picks</h2>
+  <div class="fill"></div>
+</div>
+
+<div class="featured-grid">
+  <div class="feat-card">
+    <span class="feat-tag mono">001 — CHATBOTS</span>
+    <h3>ChatGPT</h3>
+    <p>A conversational assistant for drafting, brainstorming, and working through problems in plain language.</p>
+    <span class="feat-arrow">↗</span>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag mono">002 — DESIGN</span>
+    <h3>Midjourney</h3>
+    <p>Turns short text prompts into richly detailed, painterly images — a favorite for concept and mood work.</p>
+    <span class="feat-arrow">↗</span>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag mono">011 — VIDEO</span>
+    <h3>Runway</h3>
+    <p>A generative video toolkit spanning text-to-video, editing, and effects once reserved for post-production suites.</p>
+    <span class="feat-arrow">↗</span>
+  </div>
+</div>
+
+<div class="section-label">
+  <span class="no">§02</span>
+  <h2>Full catalog</h2>
+  <div class="fill"></div>
+</div>
+
+<div class="index-list" id="indexList">
+  <div class="index-row" data-cat="chatbots" data-name="chatgpt">
+    <span class="row-no mono">001</span>
+    <span class="row-name">ChatGPT</span>
+    <span class="row-cat">Chatbots</span>
+    <span class="row-desc">Versatile assistant for writing, analysis, images, and everyday questions.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="chatbots" data-name="claude">
+    <span class="row-no mono">002</span>
+    <span class="row-name">Claude</span>
+    <span class="row-cat">Chatbots</span>
+    <span class="row-desc">Built for long-form writing, careful reasoning, and coding across large documents.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="chatbots" data-name="gemini">
+    <span class="row-no mono">003</span>
+    <span class="row-name">Gemini</span>
+    <span class="row-cat">Chatbots</span>
+    <span class="row-desc">Google's multimodal assistant for research, image generation, and everyday tasks.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="chatbots" data-name="perplexity">
+    <span class="row-no mono">004</span>
+    <span class="row-name">Perplexity</span>
+    <span class="row-cat">Chatbots</span>
+    <span class="row-desc">Search-first assistant that answers questions with cited sources.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="chatbots" data-name="grok">
+    <span class="row-no mono">005</span>
+    <span class="row-name">Grok</span>
+    <span class="row-cat">Chatbots</span>
+    <span class="row-desc">xAI's assistant, tuned for fact-checking and real-time topics.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="chatbots" data-name="microsoft copilot">
+    <span class="row-no mono">006</span>
+    <span class="row-name">Microsoft Copilot</span>
+    <span class="row-cat">Chatbots</span>
+    <span class="row-desc">Assistant built into Windows and Office for everyday work tasks.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="chatbots" data-name="meta ai">
+    <span class="row-no mono">007</span>
+    <span class="row-name">Meta AI</span>
+    <span class="row-cat">Chatbots</span>
+    <span class="row-desc">Conversational assistant built into Meta's apps and platforms.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="chatbots" data-name="deepseek">
+    <span class="row-no mono">008</span>
+    <span class="row-name">DeepSeek</span>
+    <span class="row-cat">Chatbots</span>
+    <span class="row-desc">Open-weight reasoning model known for strong performance at low cost.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="chatbots" data-name="poe">
+    <span class="row-no mono">009</span>
+    <span class="row-name">Poe</span>
+    <span class="row-cat">Chatbots</span>
+    <span class="row-desc">One interface for chatting with many different AI models.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="chatbots" data-name="character.ai">
+    <span class="row-no mono">010</span>
+    <span class="row-name">Character.AI</span>
+    <span class="row-cat">Chatbots</span>
+    <span class="row-desc">Lets you create and chat with custom AI personas and characters.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="design" data-name="midjourney">
+    <span class="row-no mono">011</span>
+    <span class="row-name">Midjourney</span>
+    <span class="row-cat">Design</span>
+    <span class="row-desc">Turns short text prompts into richly detailed, painterly images.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="design" data-name="canva ai">
+    <span class="row-no mono">012</span>
+    <span class="row-name">Canva AI</span>
+    <span class="row-cat">Design</span>
+    <span class="row-desc">Layout and image tools built into a drag-and-drop design canvas.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="design" data-name="dall-e 3">
+    <span class="row-no mono">013</span>
+    <span class="row-name">DALL-E 3</span>
+    <span class="row-cat">Design</span>
+    <span class="row-desc">OpenAI's image generator, tightly integrated with ChatGPT prompting.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="design" data-name="adobe firefly">
+    <span class="row-no mono">014</span>
+    <span class="row-name">Adobe Firefly</span>
+    <span class="row-cat">Design</span>
+    <span class="row-desc">Generative image and effects tools built into Adobe's creative apps.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="design" data-name="stable diffusion">
+    <span class="row-no mono">015</span>
+    <span class="row-name">Stable Diffusion</span>
+    <span class="row-cat">Design</span>
+    <span class="row-desc">Open-weight image model that can run locally or in the cloud.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="design" data-name="ideogram">
+    <span class="row-no mono">016</span>
+    <span class="row-name">Ideogram</span>
+    <span class="row-cat">Design</span>
+    <span class="row-desc">Image generator known for rendering readable text inside images.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="design" data-name="leonardo ai">
+    <span class="row-no mono">017</span>
+    <span class="row-name">Leonardo AI</span>
+    <span class="row-cat">Design</span>
+    <span class="row-desc">Image generation with fine-tuned models for game and product art.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="design" data-name="flux">
+    <span class="row-no mono">018</span>
+    <span class="row-name">Flux</span>
+    <span class="row-cat">Design</span>
+    <span class="row-desc">Open-source image model prized for speed and photorealism.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="design" data-name="recraft">
+    <span class="row-no mono">019</span>
+    <span class="row-name">Recraft</span>
+    <span class="row-cat">Design</span>
+    <span class="row-desc">Vector and raster image generation aimed at brand-consistent design.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="design" data-name="krea ai">
+    <span class="row-no mono">020</span>
+    <span class="row-name">Krea AI</span>
+    <span class="row-cat">Design</span>
+    <span class="row-desc">Real-time image generation and upscaling for rapid iteration.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="video" data-name="synthesia">
+    <span class="row-no mono">021</span>
+    <span class="row-name">Synthesia</span>
+    <span class="row-cat">Video</span>
+    <span class="row-desc">Generates presenter-led video from a script — no camera required.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="video" data-name="runway">
+    <span class="row-no mono">022</span>
+    <span class="row-name">Runway</span>
+    <span class="row-cat">Video</span>
+    <span class="row-desc">Generative video editing, from green-screen removal to text-to-video.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="video" data-name="pictory">
+    <span class="row-no mono">023</span>
+    <span class="row-name">Pictory</span>
+    <span class="row-cat">Video</span>
+    <span class="row-desc">Converts long-form text or footage into short, shareable clips.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="video" data-name="heygen">
+    <span class="row-no mono">024</span>
+    <span class="row-name">HeyGen</span>
+    <span class="row-cat">Video</span>
+    <span class="row-desc">Builds talking-avatar videos in dozens of languages.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="video" data-name="veo">
+    <span class="row-no mono">025</span>
+    <span class="row-name">Veo</span>
+    <span class="row-cat">Video</span>
+    <span class="row-desc">Google's text-to-video generator, known for realistic motion and camera control.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="video" data-name="sora 2">
+    <span class="row-no mono">026</span>
+    <span class="row-name">Sora 2</span>
+    <span class="row-cat">Video</span>
+    <span class="row-desc">Produces cinematic, story-driven clips from a written prompt.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="video" data-name="kling">
+    <span class="row-no mono">027</span>
+    <span class="row-name">Kling</span>
+    <span class="row-cat">Video</span>
+    <span class="row-desc">Text-to-video model known for long, coherent generated clips.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="video" data-name="luma dream machine">
+    <span class="row-no mono">028</span>
+    <span class="row-name">Luma Dream Machine</span>
+    <span class="row-cat">Video</span>
+    <span class="row-desc">Fast text- and image-to-video generation with fluid motion.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="video" data-name="pika">
+    <span class="row-no mono">029</span>
+    <span class="row-name">Pika</span>
+    <span class="row-cat">Video</span>
+    <span class="row-desc">Short-form AI video generation tuned for social content.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="video" data-name="invideo">
+    <span class="row-no mono">030</span>
+    <span class="row-name">InVideo</span>
+    <span class="row-cat">Video</span>
+    <span class="row-desc">Template-driven video creation from scripts or blog posts.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="writing" data-name="jasper">
+    <span class="row-no mono">031</span>
+    <span class="row-name">Jasper</span>
+    <span class="row-cat">Writing</span>
+    <span class="row-desc">Brand-tuned copywriting built for marketing teams shipping at volume.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="writing" data-name="grammarly">
+    <span class="row-no mono">032</span>
+    <span class="row-name">Grammarly</span>
+    <span class="row-cat">Writing</span>
+    <span class="row-desc">Checks tone, clarity, and correctness as you write.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="writing" data-name="copy.ai">
+    <span class="row-no mono">033</span>
+    <span class="row-name">Copy.ai</span>
+    <span class="row-cat">Writing</span>
+    <span class="row-desc">Templates for ads, emails, and product copy, generated in seconds.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="writing" data-name="writesonic">
+    <span class="row-no mono">034</span>
+    <span class="row-name">Writesonic</span>
+    <span class="row-cat">Writing</span>
+    <span class="row-desc">AI copywriting for articles, ads, and product descriptions.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="writing" data-name="rytr">
+    <span class="row-no mono">035</span>
+    <span class="row-name">Rytr</span>
+    <span class="row-cat">Writing</span>
+    <span class="row-desc">Lightweight AI writer for short-form marketing and social copy.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="writing" data-name="sudowrite">
+    <span class="row-no mono">036</span>
+    <span class="row-name">Sudowrite</span>
+    <span class="row-cat">Writing</span>
+    <span class="row-desc">Fiction-focused writing assistant for authors and novelists.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="writing" data-name="quillbot">
+    <span class="row-no mono">037</span>
+    <span class="row-name">QuillBot</span>
+    <span class="row-cat">Writing</span>
+    <span class="row-desc">Paraphrasing, grammar, and summarizing tool for everyday writing.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="writing" data-name="wordtune">
+    <span class="row-no mono">038</span>
+    <span class="row-name">Wordtune</span>
+    <span class="row-cat">Writing</span>
+    <span class="row-desc">Rewrites sentences for clarity and tone with one click.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="writing" data-name="prowritingaid">
+    <span class="row-no mono">039</span>
+    <span class="row-name">ProWritingAid</span>
+    <span class="row-cat">Writing</span>
+    <span class="row-desc">Style and grammar report built for long-form manuscripts.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="writing" data-name="anyword">
+    <span class="row-no mono">040</span>
+    <span class="row-name">Anyword</span>
+    <span class="row-cat">Writing</span>
+    <span class="row-desc">Predicts and optimizes marketing copy performance before you publish.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="productivity" data-name="notion ai">
+    <span class="row-no mono">041</span>
+    <span class="row-name">Notion AI</span>
+    <span class="row-cat">Productivity</span>
+    <span class="row-desc">Summarizes, drafts, and organizes notes inside your existing workspace.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="productivity" data-name="notebooklm">
+    <span class="row-no mono">042</span>
+    <span class="row-name">NotebookLM</span>
+    <span class="row-cat">Productivity</span>
+    <span class="row-desc">Answers questions and summarizes using only the documents you upload.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="productivity" data-name="gamma">
+    <span class="row-no mono">043</span>
+    <span class="row-name">Gamma</span>
+    <span class="row-cat">Productivity</span>
+    <span class="row-desc">Turns notes into polished presentations, documents, and web pages.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="productivity" data-name="otter.ai">
+    <span class="row-no mono">044</span>
+    <span class="row-name">Otter.ai</span>
+    <span class="row-cat">Productivity</span>
+    <span class="row-desc">Transcribes and summarizes meetings as they happen.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="productivity" data-name="fireflies.ai">
+    <span class="row-no mono">045</span>
+    <span class="row-name">Fireflies.ai</span>
+    <span class="row-cat">Productivity</span>
+    <span class="row-desc">Records, transcribes, and searches across your meeting history.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="productivity" data-name="fathom">
+    <span class="row-no mono">046</span>
+    <span class="row-name">Fathom</span>
+    <span class="row-cat">Productivity</span>
+    <span class="row-desc">Records meetings and auto-generates summaries and action items.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="productivity" data-name="reclaim.ai">
+    <span class="row-no mono">047</span>
+    <span class="row-name">Reclaim.ai</span>
+    <span class="row-cat">Productivity</span>
+    <span class="row-desc">Auto-schedules tasks and focus time around your calendar.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="productivity" data-name="motion">
+    <span class="row-no mono">048</span>
+    <span class="row-name">Motion</span>
+    <span class="row-cat">Productivity</span>
+    <span class="row-desc">AI planner that builds your daily schedule around deadlines.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="productivity" data-name="clickup ai">
+    <span class="row-no mono">049</span>
+    <span class="row-name">ClickUp AI</span>
+    <span class="row-cat">Productivity</span>
+    <span class="row-desc">Task and project assistant built into the ClickUp workspace.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="productivity" data-name="zapier">
+    <span class="row-no mono">050</span>
+    <span class="row-name">Zapier</span>
+    <span class="row-cat">Productivity</span>
+    <span class="row-desc">Connects apps and automates repetitive multi-step workflows.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="marketing" data-name="surfer seo">
+    <span class="row-no mono">051</span>
+    <span class="row-name">Surfer SEO</span>
+    <span class="row-cat">Marketing</span>
+    <span class="row-desc">Content optimization scored against top-ranking search pages.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="marketing" data-name="hubspot ai">
+    <span class="row-no mono">052</span>
+    <span class="row-name">HubSpot AI</span>
+    <span class="row-cat">Marketing</span>
+    <span class="row-desc">AI features layered across HubSpot's marketing and CRM tools.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="marketing" data-name="marketmuse">
+    <span class="row-no mono">053</span>
+    <span class="row-name">MarketMuse</span>
+    <span class="row-cat">Marketing</span>
+    <span class="row-desc">Content planning and topic research driven by AI analysis.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="marketing" data-name="persado">
+    <span class="row-no mono">054</span>
+    <span class="row-name">Persado</span>
+    <span class="row-cat">Marketing</span>
+    <span class="row-desc">Generates and tests marketing language for emotional resonance.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="marketing" data-name="semrush ai">
+    <span class="row-no mono">055</span>
+    <span class="row-name">Semrush AI</span>
+    <span class="row-cat">Marketing</span>
+    <span class="row-desc">AI-assisted SEO, content, and competitive research toolkit.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="marketing" data-name="adcreative.ai">
+    <span class="row-no mono">056</span>
+    <span class="row-name">AdCreative.ai</span>
+    <span class="row-cat">Marketing</span>
+    <span class="row-desc">Generates ad creative and copy optimized for conversions.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="marketing" data-name="simplified">
+    <span class="row-no mono">057</span>
+    <span class="row-name">Simplified</span>
+    <span class="row-cat">Marketing</span>
+    <span class="row-desc">All-in-one content, design, and social scheduling for small teams.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="marketing" data-name="brandwatch">
+    <span class="row-no mono">058</span>
+    <span class="row-name">Brandwatch</span>
+    <span class="row-cat">Marketing</span>
+    <span class="row-desc">Social listening and consumer insight powered by AI analysis.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="marketing" data-name="smartly.io">
+    <span class="row-no mono">059</span>
+    <span class="row-name">Smartly.io</span>
+    <span class="row-cat">Marketing</span>
+    <span class="row-desc">Automates paid social ad creation and campaign optimization.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="marketing" data-name="klaviyo ai">
+    <span class="row-no mono">060</span>
+    <span class="row-name">Klaviyo AI</span>
+    <span class="row-cat">Marketing</span>
+    <span class="row-desc">AI-assisted email and SMS marketing built for ecommerce.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="audio" data-name="elevenlabs">
+    <span class="row-no mono">061</span>
+    <span class="row-name">ElevenLabs</span>
+    <span class="row-cat">Audio</span>
+    <span class="row-desc">Realistic voice synthesis and cloning for narration and dubbing.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="audio" data-name="suno">
+    <span class="row-no mono">062</span>
+    <span class="row-name">Suno</span>
+    <span class="row-cat">Audio</span>
+    <span class="row-desc">Generates full original songs, vocals included, from a text description.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="audio" data-name="udio">
+    <span class="row-no mono">063</span>
+    <span class="row-name">Udio</span>
+    <span class="row-cat">Audio</span>
+    <span class="row-desc">Text-to-music generator for original songs and instrumentals.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="audio" data-name="descript">
+    <span class="row-no mono">064</span>
+    <span class="row-name">Descript</span>
+    <span class="row-cat">Audio</span>
+    <span class="row-desc">Edits audio and video by editing a transcript, not a timeline.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="audio" data-name="murf">
+    <span class="row-no mono">065</span>
+    <span class="row-name">Murf</span>
+    <span class="row-cat">Audio</span>
+    <span class="row-desc">Studio-quality AI voiceovers for video and presentations.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="audio" data-name="resemble ai">
+    <span class="row-no mono">066</span>
+    <span class="row-name">Resemble AI</span>
+    <span class="row-cat">Audio</span>
+    <span class="row-desc">Custom voice cloning and real-time voice generation.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="audio" data-name="podcastle">
+    <span class="row-no mono">067</span>
+    <span class="row-name">Podcastle</span>
+    <span class="row-cat">Audio</span>
+    <span class="row-desc">AI-assisted podcast recording, editing, and voice enhancement.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="audio" data-name="splice">
+    <span class="row-no mono">068</span>
+    <span class="row-name">Splice</span>
+    <span class="row-cat">Audio</span>
+    <span class="row-desc">Sample library and AI-assisted tools for music production.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="audio" data-name="aiva">
+    <span class="row-no mono">069</span>
+    <span class="row-name">AIVA</span>
+    <span class="row-cat">Audio</span>
+    <span class="row-desc">Composes original instrumental scores for film and games.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="audio" data-name="soundraw">
+    <span class="row-no mono">070</span>
+    <span class="row-name">Soundraw</span>
+    <span class="row-cat">Audio</span>
+    <span class="row-desc">Generates royalty-free background music by mood and genre.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="code" data-name="github copilot">
+    <span class="row-no mono">071</span>
+    <span class="row-name">GitHub Copilot</span>
+    <span class="row-cat">Code</span>
+    <span class="row-desc">Suggests and completes code inline as you type.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="code" data-name="cursor">
+    <span class="row-no mono">072</span>
+    <span class="row-name">Cursor</span>
+    <span class="row-cat">Code</span>
+    <span class="row-desc">AI-native code editor that writes, edits, and debugs alongside you.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="code" data-name="claude code">
+    <span class="row-no mono">073</span>
+    <span class="row-name">Claude Code</span>
+    <span class="row-cat">Code</span>
+    <span class="row-desc">Agentic coding tool that plans and ships full features from the terminal.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="code" data-name="cody">
+    <span class="row-no mono">074</span>
+    <span class="row-name">Cody</span>
+    <span class="row-cat">Code</span>
+    <span class="row-desc">Sourcegraph's AI assistant with deep codebase-wide context.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="code" data-name="replit ai">
+    <span class="row-no mono">075</span>
+    <span class="row-name">Replit AI</span>
+    <span class="row-cat">Code</span>
+    <span class="row-desc">Builds and runs full projects inside the browser-based Replit IDE.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="code" data-name="tabnine">
+    <span class="row-no mono">076</span>
+    <span class="row-name">Tabnine</span>
+    <span class="row-cat">Code</span>
+    <span class="row-desc">Privacy-focused code completion that can run on your own infrastructure.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="code" data-name="windsurf">
+    <span class="row-no mono">077</span>
+    <span class="row-name">Windsurf</span>
+    <span class="row-cat">Code</span>
+    <span class="row-desc">AI-native IDE built around agentic, multi-file code editing.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="code" data-name="v0">
+    <span class="row-no mono">078</span>
+    <span class="row-name">v0</span>
+    <span class="row-cat">Code</span>
+    <span class="row-desc">Generates React UI components from plain-language descriptions.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="code" data-name="bolt.new">
+    <span class="row-no mono">079</span>
+    <span class="row-name">Bolt.new</span>
+    <span class="row-cat">Code</span>
+    <span class="row-desc">Builds and deploys full-stack web apps from a single prompt.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="code" data-name="lovable">
+    <span class="row-no mono">080</span>
+    <span class="row-name">Lovable</span>
+    <span class="row-cat">Code</span>
+    <span class="row-desc">Describes an app in plain English to get a working prototype.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="automation" data-name="n8n">
+    <span class="row-no mono">081</span>
+    <span class="row-name">n8n</span>
+    <span class="row-cat">Automation</span>
+    <span class="row-desc">Self-hosted workflow automation that connects your tools and lets AI run them.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="automation" data-name="make">
+    <span class="row-no mono">082</span>
+    <span class="row-name">Make</span>
+    <span class="row-cat">Automation</span>
+    <span class="row-desc">Visual workflow builder for connecting apps and automating tasks.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="automation" data-name="lindy ai">
+    <span class="row-no mono">083</span>
+    <span class="row-name">Lindy AI</span>
+    <span class="row-cat">Automation</span>
+    <span class="row-desc">No-code AI agents that handle email, scheduling, and repetitive work.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="automation" data-name="manus">
+    <span class="row-no mono">084</span>
+    <span class="row-name">Manus</span>
+    <span class="row-cat">Automation</span>
+    <span class="row-desc">General-purpose AI agent that plans and executes multi-step tasks.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="automation" data-name="crewai">
+    <span class="row-no mono">085</span>
+    <span class="row-name">CrewAI</span>
+    <span class="row-cat">Automation</span>
+    <span class="row-desc">Framework for orchestrating teams of cooperating AI agents.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="automation" data-name="langchain">
+    <span class="row-no mono">086</span>
+    <span class="row-name">LangChain</span>
+    <span class="row-cat">Automation</span>
+    <span class="row-desc">Developer framework for building applications on top of language models.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="automation" data-name="autogpt">
+    <span class="row-no mono">087</span>
+    <span class="row-name">AutoGPT</span>
+    <span class="row-cat">Automation</span>
+    <span class="row-desc">Early autonomous agent framework that chains tasks toward a goal.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="automation" data-name="relevance ai">
+    <span class="row-no mono">088</span>
+    <span class="row-name">Relevance AI</span>
+    <span class="row-cat">Automation</span>
+    <span class="row-desc">Builds and deploys custom AI agents for business workflows.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="automation" data-name="gumloop">
+    <span class="row-no mono">089</span>
+    <span class="row-name">Gumloop</span>
+    <span class="row-cat">Automation</span>
+    <span class="row-desc">Drag-and-drop builder for AI-powered automation pipelines.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="automation" data-name="uipath ai">
+    <span class="row-no mono">090</span>
+    <span class="row-name">UiPath AI</span>
+    <span class="row-cat">Automation</span>
+    <span class="row-desc">Enterprise robotic process automation with AI-driven decisioning.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="3d" data-name="spline ai">
+    <span class="row-no mono">091</span>
+    <span class="row-name">Spline AI</span>
+    <span class="row-cat">3D & AR</span>
+    <span class="row-desc">Generates and edits interactive 3D scenes for the web.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="3d" data-name="kaedim">
+    <span class="row-no mono">092</span>
+    <span class="row-name">Kaedim</span>
+    <span class="row-cat">3D & AR</span>
+    <span class="row-desc">Converts 2D images into game-ready 3D models.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="3d" data-name="meshy">
+    <span class="row-no mono">093</span>
+    <span class="row-name">Meshy</span>
+    <span class="row-cat">3D & AR</span>
+    <span class="row-desc">Text- or image-to-3D model generation for games and design.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="3d" data-name="csm">
+    <span class="row-no mono">094</span>
+    <span class="row-name">CSM</span>
+    <span class="row-cat">3D & AR</span>
+    <span class="row-desc">Turns single images into textured 3D assets.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="3d" data-name="rodin">
+    <span class="row-no mono">095</span>
+    <span class="row-name">Rodin</span>
+    <span class="row-cat">3D & AR</span>
+    <span class="row-desc">High-fidelity 3D asset generation from images or text.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="3d" data-name="promeai">
+    <span class="row-no mono">096</span>
+    <span class="row-name">Promeai</span>
+    <span class="row-cat">3D & AR</span>
+    <span class="row-desc">AI rendering and 3D concept tools for architecture and design.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="3d" data-name="sloyd">
+    <span class="row-no mono">097</span>
+    <span class="row-name">Sloyd</span>
+    <span class="row-cat">3D & AR</span>
+    <span class="row-desc">Generates parametric, editable 3D models on demand.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="3d" data-name="alpha3d">
+    <span class="row-no mono">098</span>
+    <span class="row-name">Alpha3D</span>
+    <span class="row-cat">3D & AR</span>
+    <span class="row-desc">Converts product photos into 3D and AR-ready models.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="3d" data-name="3dfy.ai">
+    <span class="row-no mono">099</span>
+    <span class="row-name">3DFY.ai</span>
+    <span class="row-cat">3D & AR</span>
+    <span class="row-desc">Bulk-generates 3D models from text prompts for catalogs.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+  <div class="index-row" data-cat="3d" data-name="skybox ai">
+    <span class="row-no mono">100</span>
+    <span class="row-name">Skybox AI</span>
+    <span class="row-cat">3D & AR</span>
+    <span class="row-desc">Generates 360-degree skyboxes and environments for games and VR.</span>
+    <a href="#" class="row-link">Explore</a>
+  </div>
+
+  <div class="empty-state" id="emptyState">No entries match that search — try a different term or category.</div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h5>The Index</h5>
+      <p class="lead">A quietly maintained catalog of the AI tools worth knowing about.</p>
+    </div>
+    <div>
+      <h5>Browse</h5>
+      <ul>
+        <li><a href="#">All entries</a></li>
+        <li><a href="#">By category</a></li>
+        <li><a href="#">Latest additions</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contribute</h5>
+      <ul>
+        <li><a href="#">Submit a tool</a></li>
+        <li><a href="#">Suggest a correction</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>About</h5>
+      <ul>
+        <li><a href="#">Editorial policy</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 THE INDEX</span>
+    <span>100 ENTRIES / 10 CATEGORIES</span>
+  </div>
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const rows = document.querySelectorAll('.index-row');
+  const searchInput = document.getElementById('searchInput');
+  const emptyState = document.getElementById('emptyState');
+  let activeCat = 'all';
+
+  function applyFilters(){
+    const term = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
+    rows.forEach(row => {
+      const matchesCat = activeCat === 'all' || row.dataset.cat === activeCat;
+      const matchesTerm = !term ||
+        row.dataset.name.includes(term) ||
+        row.dataset.cat.includes(term) ||
+        row.querySelector('.row-desc').textContent.toLowerCase().includes(term);
+      const show = matchesCat && matchesTerm;
+      row.classList.toggle('hidden', !show);
+      if(show) visibleCount++;
+    });
+    emptyState.classList.toggle('show', visibleCount === 0);
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      activeCat = tab.dataset.cat;
+      applyFilters();
+    });
+  });
+
+  searchInput.addEventListener('input', applyFilters);
+</script>
+
+</body>
+</html>

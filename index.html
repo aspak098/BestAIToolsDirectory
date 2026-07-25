@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BestAIToolsDirectory | Explore 500+ AI Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background-color: #070B14; /* Deep dark blue background */
+            color: #FFFFFF;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            border-bottom: 1px solid #1F2937;
+            background-color: #070B14;
+        }
+       .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+       .logo-icon {
+            color: #2563EB;
+            font-size: 1.8rem;
+        }
+       .nav-links {
+            display: flex;
+            gap: 30px;
+            font-size: 0.95rem;
+            color: #D1D5DB;
+        }
+       .nav-links a:hover {
+            color: #FFFFFF;
+        }
+       .btn-submit {
+            background-color: #2563EB;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+       .btn-submit:hover {
+            background-color: #1D4ED8;
+        }
+
+        /* Hero Section */
+       .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+            background: radial-gradient(ellipse at top, #111827 0%, #070B14 80%);
+        }
+       .hero-badge {
+            color: #60A5FA;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: block;
+        }
+       .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+       .hero h1 span {
+            color: #3B82F6;
+        }
+       .hero p {
+            color: #9CA3AF;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 35px;
+            line-height: 1.6;
+        }
+
+        /* Search Bar */
+       .search-container {
+            display: flex;
+            max-width: 650px;
+            margin: 0 auto 40px;
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 12px;
+            padding: 6px;
+        }
+       .search-container input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 16px 24px;
+            color: #FFF;
+            font-size: 1.05rem;
+            outline: none;
+        }
+       .search-container button {
+            background: #2563EB;
+            color: #FFF;
+            border: none;
+            padding: 0 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        /* Categories */
+       .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 50px;
+        }
+       .cat-btn {
+            background: #111827;
+            border: 1px solid #374151;
+            color: #D1D5DB;
+            padding: 10px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+       .cat-btn.active,.cat-btn:hover {
+            background: #2563EB;
+            color: #FFF;
+            border-color: #2563EB;
+        }
+
+        /* Tool Cards Grid */
+       .grid-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+        }
+       .card {
+            background: #111827;
+            border: 1px solid #1F2937;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+       .card:hover {
+            transform: translateY(-5px);
+            border-color: #374151;
+        }
+       .card-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        /* Icon Colors */
+       .bg-green { background: #064E3B; color: #10B981; }
+       .bg-blue { background: #1E3A8A; color: #3B82F6; }
+       .bg-cyan { background: #164E63; color: #06B6D4; }
+       .bg-white { background: #FFFFFF; color: #000000; }
+       .bg-purple { background: #4C1D95; color: #A78BFA; }
+
+       .card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+       .best-for {
+            color: #F59E0B; /* Orange/Yellow accent */
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+       .card p {
+            color: #9CA3AF;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            flex-grow: 1;
+            margin-bottom: 24px;
+        }
+       .explore-btn {
+            display: block;
+            text-align: center;
+            background: transparent;
+            border: 1px solid #3B82F6;
+            color: #3B82F6;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+       .explore-btn:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        /* Pagination */
+       .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 60px;
+        }
+       .page-btn {
+            background: #111827;
+            border: 1px solid #374151;
+            color: #D1D5DB;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+       .page-btn.active,.page-btn:hover {
+            background: #2563EB;
+            color: white;
+            border-color: #2563EB;
+        }
+       .page-dots { color: #6B7280; }
+
+        /* Bottom Features Section */
+       .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            border-top: 1px solid #1F2937;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            color: #9CA3AF;
+        }
+       .feature h4 {
+            color: #FFFFFF;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+       .feature p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+       .feature-ideal ul {
+            list-style: none;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+       .feature-ideal li::before {
+            content: "•";
+            color: #3B82F6;
+            font-weight: bold;
+            display: inline-block; 
+            width: 1em;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <span class="logo-icon">⚡</span> BestAIToolsDirectory
+        </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">AI Tools</a>
+            <a href="#">Categories</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+        </div>
+        <button class="btn-submit">Submit Tool</button>
+    </nav>
+
+    <section class="hero">
+        <span class="hero-badge">Discover The Best</span>
+        <h1>Explore <span>500+</span> AI Tools</h1>
+        <p>Find the perfect AI tools for your business, productivity, creativity and more. Curated, tested and ranked.</p>
+        
+        <div class="search-container">
+            <input type="text" placeholder="Search AI tools...">
+            <button>Search</button>
+        </div>
+
+        <div class="categories">
+            <button class="cat-btn active">All Tools</button>
+            <button class="cat-btn">Chatbots</button>
+            <button class="cat-btn">Design</button>
+            <button class="cat-btn">Video</button>
+            <button class="cat-btn">Writing</button>
+            <button class="cat-btn">Productivity</button>
+            <button class="cat-btn">Marketing</button>
+            <button class="cat-btn">More ⌄</button>
+        </div>
+    </section>
+
+    <section class="grid-container">
+        <div class="card">
+            <div class="card-icon-wrapper bg-green">🧠</div>
+            <h3>ChatGPT</h3>
+            <div class="best-for">Best for Writing</div>
+            <p>Advanced AI language model for conversations, writing, and problem-solving.</p>
+            <a href="#" class="explore-btn">Explore Now</a>
+        </div>
+        
+        <div class="card">
+            <div class="card-icon-wrapper bg-blue">⛵</div>
+            <h3>Midjourney</h3>
+            <div class="best-for">Best for Image Generation</div>
+            <p>Create stunning images from text with AI.</p>
+            <a href="#" class="explore-btn">Explore Now</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon-wrapper bg-cyan">🎨</div>
+            <h3>Canva AI</h3>
+            <div class="best-for">Best for Design</div>
+            <p>Design anything with AI-powered tools.</p>
+            <a href="#" class="explore-btn">Explore Now</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon-wrapper bg-white">N</div>
+            <h3>Notion AI</h3>
+            <div class="best-for">Best for Productivity</div>
+            <p>AI-powered workspace for notes, docs and team collaboration.</p>
+            <a href="#" class="explore-btn">Explore Now</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon-wrapper bg-blue">🎥</div>
+            <h3>Synthesia</h3>
+            <div class="best-for">Best for Video</div>
+            <p>Create AI videos from text in minutes.</p>
+            <a href="#" class="explore-btn">Explore Now</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon-wrapper bg-purple">✍️</div>
+            <h3>Jasper</h3>
+            <div class="best-for">Best for Copywriting</div>
+            <p>AI content writing assistant for businesses.</p>
+            <a href="#" class="explore-btn">Explore Now</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon-wrapper bg-white">C</div>
+            <h3>Copy.ai</h3>
+            <div class="best-for">Best for Marketing</div>
+            <p>Generate high-converting copy in seconds.</p>
+            <a href="#" class="explore-btn">Explore Now</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon-wrapper bg-purple">🐙</div>
+            <h3>Pictory AI</h3>
+            <div class="best-for">Best for Video Editing</div>
+            <p>Turn text into engaging videos automatically.</p>
+            <a href="#" class="explore-btn">Explore Now</a>
+        </div>
+    </section>
+
+    <div class="pagination">
+        <button class="page-btn">< Previous</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <span class="page-dots">...</span>
+        <button class="page-btn">15</button>
+        <button class="page-btn">Next ></button>
+    </div>
+
+    <section class="features-container">
+        <div class="feature">
+            <h4>🔠 ORGANIZED GRID LAYOUT</h4>
+            <p>Tools are displayed in a clean and structured grid for easy browsing and comparison.</p>
+        </div>
+        <div class="feature">
+            <h4>⚡ MODERN & ATTRACTIVE DESIGN</h4>
+            <p>Dark theme with blue accents gives a premium and professional look that builds trust.</p>
+        </div>
+        <div class="feature">
+            <h4>📱 FULLY RESPONSIVE</h4>
+            <p>Looks perfect on all devices - mobile, tablet and desktop with smooth user experience.</p>
+        </div>
+        <div class="feature">
+            <h4>🎯 BUILT FOR CONVERSIONS</h4>
+            <p>Each card has a clear call-to-action button to drive clicks, signups and affiliate revenue.</p>
+        </div>
+        <div class="feature feature-ideal">
+            <h4>📈 IDEAL FOR</h4>
+            <ul>
+                <li>AI Tools Directory</li>
+                <li>SaaS Marketplaces</li>
+                <li>Product Listings</li>
+                <li>Portfolios & Galleries</li>
+            </ul>
+        </div>
+    </section>
+
+</body>
+</html>
+
